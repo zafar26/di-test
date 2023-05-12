@@ -8,7 +8,6 @@ jobs:
     name: A test job
     steps:
       - uses: actions/checkout@v2.1.0
-      - uses: ./
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
       - run: yarn build
