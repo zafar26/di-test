@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
       - name: !!name!!
-        uses: !!link to my action on github with version!!
+        uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: npm install -g yarn
