@@ -5,7 +5,13 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps: 
+    name: A test job
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - name: !!name!!
+        uses: !!link to my action on github with version!!
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
       - run: yarn build
