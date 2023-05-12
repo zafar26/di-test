@@ -27,7 +27,30 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+
+## Deploy Statically
+```bash
+ "build": "next build && next export
+```
+Add this code in [package.json] file
+
+& run
+
+```bash
+npm run build
+# or
+yarn build
+```
+after succesfully executing this command you will get a [out] foulder in the project directory
+
+take that folder and host it in any hosting platform
 ## Deploy on Vercel
+
+Login Vercel Locally and run below Command
+```bash 
+vercel build && vercel deploy --prebuilt
+```
+there you go, you will get a domain from the terminal
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 

@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../public/Proxima-Nova-Extra-Condensed/Demo_Fonts/Fontspring-DEMO-proximanova-regular.otf');
+}
