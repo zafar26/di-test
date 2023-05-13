@@ -1,62 +1,76 @@
 'use client'
 import MyDrawer from '@/components/MyDrawer/page'
-import { Layout } from 'antd'
+import { Badge, Layout } from 'antd'
 import { useState } from 'react'
+import Image from 'next/image'
+import {
+  HelpSVG,
+  InboxSVG,
+  LogoSVG,
+  MenuSVG,
+  NotificationSVG,
+  SearchSVG,
+} from '../SVG'
 
-export default function MobileLayout() {
+export default function MobileLayout({ isDesktop }: any) {
   const [open, setOpen] = useState(false)
   const onClose = () => {
     setOpen(false)
   }
 
+  let navIcons = [
+    {
+      icon:()=><SearchSVG />
+    },
+    {
+      icon:()=><InboxSVG />
+    },
+    {
+      badge : true,
+      icon:()=><NotificationSVG />
+    },
+    {
+      icon:()=><HelpSVG />
+    }
+  ]
   return (
-    <Layout className="w-full px-4 py-2 border-b-2 border-gray-2 ">
+    <Layout className="w-full px-2 md:px-6 py-2 border-b-2 border-gray-2 ">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <svg
-            width="36"
-            height="36"
-            viewBox="0 0 36 36"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.991 36C27.9275 36 35.9825 27.9411 35.9825 18C35.9825 8.05888 27.9275 0 17.991 0C8.05459 0 -0.000488281 8.05888 -0.000488281 18C-0.000488281 27.9411 8.05459 36 17.991 36Z"
-              fill="#04433B"
-            />
-            <path
-              d="M17.991 29.3684C24.2666 29.3684 29.3541 24.2786 29.3541 18C29.3541 11.7214 24.2666 6.63159 17.991 6.63159C11.7153 6.63159 6.62793 11.7214 6.62793 18C6.62793 24.2786 11.7153 29.3684 17.991 29.3684Z"
-              fill="#00B686"
-            />
-          </svg>
-          <svg
-            className="ml-2"
-            width="7"
-            height="12"
-            viewBox="0 0 7 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2.36255 10.8583L6.38755 6.64167C6.47505 6.55 6.53688 6.4507 6.57305 6.34375C6.6098 6.23681 6.62817 6.12223 6.62817 6C6.62817 5.87778 6.6098 5.7632 6.57305 5.65625C6.53688 5.54931 6.47505 5.45 6.38755 5.35834L2.36255 1.14167C2.20213 0.973615 1.99797 0.889587 1.75005 0.889587C1.50213 0.889587 1.29797 0.973615 1.13755 1.14167C0.977132 1.30973 0.896924 1.52362 0.896924 1.78334C0.896924 2.04306 0.977132 2.25695 1.13755 2.425L4.55005 6L1.13755 9.575C0.977132 9.74306 0.896924 9.95695 0.896924 10.2167C0.896924 10.4764 0.977132 10.6903 1.13755 10.8583C1.29797 11.0264 1.50213 11.1104 1.75005 11.1104C1.99797 11.1104 2.20213 11.0264 2.36255 10.8583Z"
-              fill="#657372"
-            />
-          </svg>
+          <LogoSVG />
         </div>
-        <svg
-          onClick={() => setOpen(true)}
-          width="26"
-          height="19"
-          viewBox="0 0 26 19"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.125 1.1875C0.125 0.669738 0.544738 0.25 1.0625 0.25H24.5625C25.0802 0.25 25.5 0.669738 25.5 1.1875C25.5 1.70526 25.0802 2.125 24.5625 2.125H1.0625C0.544738 2.125 0.125 1.70526 0.125 1.1875ZM1.0625 17.4375C1.0625 16.9198 1.48224 16.5 2 16.5H24C24.5177 16.5 24.9375 16.9198 24.9375 17.4375C24.9375 17.9552 24.5177 18.375 24 18.375H2C1.48224 18.375 1.0625 17.9552 1.0625 17.4375ZM1.4375 8.375C0.919738 8.375 0.5 8.79475 0.5 9.3125C0.5 9.83025 0.919738 10.25 1.4375 10.25H24.5625C25.0802 10.25 25.5 9.83025 25.5 9.3125C25.5 8.79475 25.0802 8.375 24.5625 8.375H1.4375Z"
-            fill="#657372"
-          />
-        </svg>
+        {/* Desktop Nav Items */}
+        {isDesktop ? (
+          <div className="flex">
+            {navIcons.map((d:any,i:number)=>{
+              if (d.badge){
+                return <div key={i} className="flex items-center px-6">
+                <Badge count={5}>
+                  {d.icon()}
+                </Badge>
+              </div>
+              }
+              return <div key={i} className="flex items-center px-6">
+              {d.icon()}
+            </div>
+            })}
+            
+            <div className="flex items-center ">
+              <Image
+                src="/user_image.png"
+                width={60}
+                height={60}
+                alt="Picture of the author"
+              />
+            </div>
+          </div>
+        ) : (
+          <div onClick={() => setOpen(true)}>
+            <MenuSVG />
+          </div>
+        )}
       </div>
+      {/* Drawer for Mobile */}
       <MyDrawer open={open} onClose={onClose} />
     </Layout>
   )
